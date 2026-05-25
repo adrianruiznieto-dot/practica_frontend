@@ -6,9 +6,56 @@
 
 <div class="user-list-container">
     <h2>User List</h2>
-    <!-- @TODO: Implement user list display here -->
-    <div>
-        <button (click)="launchPopup()">Popup</button>
-    </div>
-
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Genero</th>
+                <th>Nickname</th>
+                <th>Name</th>
+                <th>Creation Date</th>
+                <th>Job</th>
+                <th>Main adress</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios">
+                <td>
+                    <img
+                        *ngIf="usuario.genero?.id === 1"
+                        src="assets/images/Male.JPG"
+                        [alt]="usuario.genero?.nombre"
+                        width="30"
+                        height="30"
+                    >
+                    <img
+                        *ngIf="usuario.genero?.id === 2"
+                        src="assets/images/Female.JPG"
+                        [alt]="usuario.genero?.nombre"
+                        width="30"
+                        height="30"
+                    >
+                    <img
+                        *ngIf="usuario.genero?.id !== 1 && usuario.genero?.id !== 2"
+                        src="assets/images/Other.png"
+                        [alt]="usuario.genero?.nombre || 'Otro genero'"
+                        width="30"
+                        height="30"
+                    >
+                </td>
+                <td>{{ usuario.nickUsuario }}</td>
+                <td>{{ usuario.nombre }} {{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
+                <td>{{ usuario.fechaHoraCreacion }}</td>
+                <td>{{ usuario.puestoTrabajo?.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <nav class="menu">
+        <ul class="menu-items">
+            <li><button (click)="launchPopup()">Popup</button></li>
+            <li><button (click)="launchPopup('EDIT')">Editar</button></li>
+            <li><button (click)="launchPopup('DELETE')">Borrar</button></li>
+            <li><button (click)="launchPopup('CREATE')">Crear</button></li>
+            <li><button (click)="logout()">Cerrar sesión</button></li>
+        </ul>
+    </nav>
 </div>

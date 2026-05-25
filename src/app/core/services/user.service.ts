@@ -21,7 +21,7 @@ export class UserService {
   async obtenerUsuarios() {
     return await to(
         this.http
-            .get<Usuario>('/assets/mocks/user.json')
+            .get<Usuario[]>('/assets/mocks/users.json')
             .toPromise()
     )
   }

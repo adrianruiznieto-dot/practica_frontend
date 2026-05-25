@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {Router} from "@angular/router";
 import { UserPopupComponent } from '../user-popup/user-popup.component';
+import { UserService } from 'src/app/core/services/user.service';
+import { Usuario } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -13,14 +15,25 @@ import { UserPopupComponent } from '../user-popup/user-popup.component';
 export class UserListComponent implements OnInit {
   @Output() cerrarPopUpOk = new EventEmitter<void>();
   @Output() cerrarPopUpCancel = new EventEmitter<void>();
+  
+  usuarios: Usuario[] = [];
+  modoPopup: string = 'CLOSED';
 
-  modoPopup: String = 'CLOSED';
-
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
+    this.userService = userService;
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {  
+    let isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn !== 'true') {
+      this.router.navigate(['/login']);
+    }else {
+      console.log("Usuario logueado, mostrando listado de usuarios...");
+      this.usuarios = await this.userService.obtenerUsuarios();
+      console.log("Usuarios obtenidos:", this.usuarios);
+    
+    }
   }
 
   onCerrarPopUpOk() {
@@ -31,10 +44,18 @@ export class UserListComponent implements OnInit {
     this.modoPopup = 'CLOSED';
   }
   
-  launchPopup() {
+  launchPopup(modo: string = 'LAUNCH') {
     
-    this.modoPopup = 'LAUNCH';
+    this.modoPopup = modo;
   }
+  logout() {
+    localStorage.removeItem('isLoggedIn');
+    this.router.navigate(['/login']);
+  }
+  
+
+  
+
 
   // @TODO: Implementar propiedades, atributos, métodos... necesarios para el funcionamiento del listado de usuarios
 
