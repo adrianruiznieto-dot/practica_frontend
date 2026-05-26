@@ -1,36 +1,36 @@
 [
   {
     "id": 1,
-    "nickUsuario": "juan",
+    "nickUsuario": "Indio",
     "contrasena": "1234",
     "fechaHoraCreacion": "2025-05-14T20:06:17",
     "genero": {
       "id": 1,
       "nombre": "masculino"
     },
-    "nombre": "Juan Antonio",
-    "primerApellido": "Pérez",
+    "nombre": "ElZorro",
+    "primerApellido": "Enmascarado",
     "segundoApellido": null,
     "fechaNacimiento": "1990-06-15",
     "horaDesayuno": "08:00:00",
     "puestoTrabajo": {
       "id": 1,
-      "nombre": "Desarrollador"
+      "nombre": "Mariachi"
     },
     "admin": true
   },
   {
     "id": 2,
-    "nickUsuario": "pedro",
+    "nickUsuario": "pet",
     "contrasena": "4567",
     "fechaHoraCreacion": "2025-05-14T18:07:33",
     "genero": {
       "id": 1,
       "nombre": "masculino"
     },
-    "nombre": "Pedro Luis",
-    "primerApellido": "Sanchez",
-    "segundoApellido": "Segundo",
+    "nombre": "Takeshi",
+    "primerApellido": "Kitano",
+    "segundoApellido": "kilombo",
     "fechaNacimiento": "2025-05-14",
     "horaDesayuno": "13:14:56",
     "puestoTrabajo": {
@@ -41,14 +41,14 @@
   },
   {
     "id": 3,
-    "nickUsuario": "luisa",
+    "nickUsuario": "takanaka",
     "contrasena": "8901",
     "fechaHoraCreacion": "2025-05-14T18:07:33",
     "genero": {
       "id": 2,
       "nombre": "femenino"
     },
-    "nombre": "Luisa Alfonsina",
+    "nombre": "Adria",
     "primerApellido": "Garcia",
     "segundoApellido": "Ramirez",
     "fechaNacimiento": "2025-05-14",

@@ -1,11 +1,121 @@
-<!--<div class="dialog-overlay" (click)="onCancel()"></div>-->
 <div class="dialog-overlay"></div>
 <div class="dialog-box">
     <div class="dialog-title">
-        <h2>Pop Up</h2>
+        <h2>{{ modo === 'EDIT' ? 'Edit User' : 'Create User' }}</h2>
     </div>
 
-    <button (click)="onSave()">Aceptar</button>
-    <button (click)="onCancel()">Cancelar</button>
-    <!-- @TODO: Implementar el contenido del pop up, así como los botones de acción (ej. Cancelar, Aceptar) -->
+    <div class="form-row">
+        <div class="form-column">
+            <label for="nickUsuario">Nickname</label>
+            <input id="nickUsuario" class="form-control" type="text" [(ngModel)]="formUsuario.nickUsuario" name="nickUsuario" />
+        </div>
+        <div class="form-column">
+            <label for="contrasena">Password</label>
+            <input id="contrasena" class="form-control" type="password" [(ngModel)]="formUsuario.contrasena" name="contrasena" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-column">
+            <label for="fechaHoraCreacion">Creation Date</label>
+            <input id="fechaHoraCreacion" class="form-control" type="datetime-local" [(ngModel)]="fechaHoraCreacionString" name="fechaHoraCreacion" />
+        </div>
+        <div class="form-column">
+            <label for="nombre">Name</label>
+            <input id="nombre" class="form-control" type="text" [(ngModel)]="formUsuario.nombre" name="nombre" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-column">
+            <label for="primerApellido">First Surname</label>
+            <input id="primerApellido" class="form-control" type="text" [(ngModel)]="formUsuario.primerApellido" name="primerApellido" />
+        </div>
+        <div class="form-column">
+            <label for="segundoApellido">Second Surname</label>
+            <input id="segundoApellido" class="form-control" type="text" [(ngModel)]="formUsuario.segundoApellido" name="segundoApellido" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-column">
+            <label for="fechaNacimiento">Birth Date</label>
+            <input id="fechaNacimiento" class="form-control" type="date" [(ngModel)]="fechaNacimientoString" name="fechaNacimiento" />
+        </div>
+        <div class="form-column">
+            <label for="horaDesayuno">Breakfast Time</label>
+            <input id="horaDesayuno" class="form-control" type="time" [(ngModel)]="formUsuario.horaDesayuno" name="horaDesayuno" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-column">
+            <label for="genero">Gender</label>
+            <select id="genero" class="form-control" [(ngModel)]="formUsuario.genero" name="genero">
+                <option [ngValue]="null">Select gender</option>
+                <option *ngFor="let genero of generos" [ngValue]="genero">{{ genero.nombre }}</option>
+            </select>
+        </div>
+        <div class="form-column">
+            <label for="puestoTrabajo">Job</label>
+            <select id="puestoTrabajo" class="form-control" [(ngModel)]="formUsuario.puestoTrabajo" name="puestoTrabajo">
+                <option [ngValue]="null">Select job</option>
+                <option *ngFor="let puesto of puestos" [ngValue]="puesto">{{ puesto.nombre }}</option>
+            </select>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Direcciones</legend>
+        <div class="form-row">
+            <div class="form-column">
+                <label for="nombreCalle">Street</label>
+                <input id="nombreCalle" class="form-control" type="text" [(ngModel)]="nuevaDireccion.nombreCalle" name="nombreCalle" />
+            </div>
+            <div class="form-column">
+                <label for="numeroCalle">Number</label>
+                <input id="numeroCalle" class="form-control" type="number" [(ngModel)]="nuevaDireccion.numeroCalle" name="numeroCalle" />
+            </div>
+            <div class="form-column" style="align-self:flex-end; min-width: 120px;">
+                <button type="button" class="main-button" (click)="addDireccion()">Add Address</button>
+            </div>
+        </div>
+
+        <div class="table-scroll">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Street</th>
+                        <th>Number</th>
+                        <th>Main address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let direccion of formUsuario.direcciones">
+                        <td>
+                            <input
+                                type="radio"
+                                name="direccionPrincipal"
+                                [value]="direccion.id"
+                                [checked]="direccion.direccionPrincipal"
+                                (change)="seleccionarDireccionPrincipal(direccion.id)"
+                            />
+                        </td>
+                        <td>{{ direccion.nombreCalle }}</td>
+                        <td>{{ direccion.numeroCalle }}</td>
+                        <td>{{ direccion.direccionPrincipal ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr *ngIf="formUsuario.direcciones.length === 0">
+                        <td colspan="4">No hay direcciones. Añade una dirección para seleccionar la principal.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+
+    <div class="container-button container-button-right">
+        <button class="main-button" (click)="onSave()">Guardar</button>
+        <button class="main-button default-btn" (click)="onCancel()">Cancelar</button>
+    </div>
 </div>
